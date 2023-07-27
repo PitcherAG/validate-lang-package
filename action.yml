@@ -1,0 +1,5 @@
+name: 'Validate JSON & CSV Files'
+description: 'validate changed JSON & CSV files'
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
