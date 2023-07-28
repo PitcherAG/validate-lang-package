@@ -27,7 +27,7 @@
   "dependencies": {
     "@actions/core": "^1.10.0",
     "@actions/exec": "^1.1.1",
-    "csv-file-validator": "^2.1.0"
+    "@fast-csv/parse": "^4.3.6"
   },
   "devDependencies": {
     "@vercel/ncc": "^0.36.1",

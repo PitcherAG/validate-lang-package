@@ -6,6 +6,10 @@ module.exports = function validateJSONs() {
 
   jsonsInDir.forEach(file => {
     const fileData = fs.readFileSync(path.join('./lang', file));
-    JSON.parse(fileData.toString());
+    try {
+      JSON.parse(fileData.toString());
+    } catch(e) {
+      throw new Error(`JSON parse error, file: ${file}. ${e.message}`)
+    }
   });
 }

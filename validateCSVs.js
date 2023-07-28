@@ -1,14 +1,16 @@
 const fs = require('fs');
 const path = require('path')
-const CSVValidator = require('csv-file-validator')
+const csv = require('@fast-csv/parse');
 
 module.exports = function validateCSVs() {
   const CSVsInDir = fs.readdirSync('./lang').filter(file => path.extname(file) === '.csv');
 
-  return Promise.all(CSVsInDir.map(file => {
+  CSVsInDir.map(file => {
     const fileData = fs.readFileSync(path.join('./lang', file));
-    return CSVValidator(fileData).then(csvData => {
-        throw new Error(csvData.inValidData.map(({ message }) => message).join(', ')) // Array of error messages
-    })
-  }));
+
+    csv.parseString(fileData.toString(), { headers: true })
+      .on('error', (error) => {
+        throw new Error(`CSV formatting issue, file: ${file}. ${error.message}`)
+      })
+  });
 }

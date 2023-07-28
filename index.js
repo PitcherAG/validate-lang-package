@@ -5,7 +5,7 @@ const validateCSVs = require('./validateCSVs')
 async function run() {
   try {
     validateJSONs()
-    await validateCSVs()
+    validateCSVs()
   } catch (error) {
     core.setFailed(error.message);
   }
